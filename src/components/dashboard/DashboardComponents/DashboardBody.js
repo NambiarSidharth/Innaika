@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PostForm from '../subcomponents/PostForm'
+import PostList from '../subcomponents/PostList';
 class DashboardBody extends Component {
     
     
@@ -12,7 +13,7 @@ class DashboardBody extends Component {
         <div className="col-md-8 col-sm-12 mt2">
         <PostForm />
         <div className="row">
-            asffgfgsd
+        <PostList/>
         </div>
         </div>
       </div>
