@@ -7,7 +7,9 @@
   height: 40vmin;
   pointer-events: none;
 }
-
+.dash{
+  background-image: url(http://mrmrs.github.io/photos/u/011.jpg);
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
