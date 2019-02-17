@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import {addPost} from '../../../store/actions/postActions';
 class PostForm extends Component {
     constructor(props){
         super(props)
@@ -16,10 +17,18 @@ class PostForm extends Component {
         this.savePost(post)
     }
     savePost(post) {
+
         const {userSession} = this.props.auth;
+        const userData = userSession.loadUserData();
+        const {posts} = this.props.post;
+        let data={
+            time:Date.now(),
+            username:userData.username,
+            data:post
+        }
         this.setState({savingPost: true})
-        const options = { encrypt: false }
-        userSession.putFile(`my_posts`, JSON.stringify(post), options)
+        posts.push(data);
+        this.props.addPost(posts,userSession);
         // .finally(() => {
         //   this.setState({savingMe: false})
         // })
@@ -44,10 +53,13 @@ class PostForm extends Component {
   }
 }
 PostForm.propTypes={
-    auth:PropTypes.object.isRequired
+    auth:PropTypes.object.isRequired,
+    post:PropTypes.object.isRequired,
+    addPost:PropTypes.func.isRequired
 }
 const mapStateToProps = (state)=>({
-    auth:state.auth
+    auth:state.auth,
+    post:state.post
 })
 
-export default connect(mapStateToProps)(PostForm);
+export default connect(mapStateToProps,{addPost})(PostForm);

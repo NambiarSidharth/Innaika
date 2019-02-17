@@ -1,44 +1,41 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import {retrPost} from '../../../store/actions/postActions';
+import PostBody from './PostBody'
 class PostList extends Component {
-    constructor(props) {
-      super(props)
-    
-      this.state = {
-         post:null,
-
-      }
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+       posts:[]
     }
-    
-    loadMe() {
-        const {userSession} = this.props.auth
-        const options = { decrypt: false }
-        userSession.getFile(ME_FILENAME, options)
-        .then((content) => {
-          if(content) {
-            const me = JSON.parse(content)
-            this.setState({me, redirectToMe: false})
-          } else {
-            const me = null
-    
-            this.setState({me, redirectToMe: true})
-          }
-        })
-        console.log(me)
-      }
+  }
+    componentDidMount(){
+      let {posts} = this.props.post;
+      this.setState({posts});
+      console.log(posts)
+    }
   render() {
+    let {posts} = this.props.post;
+
+    let postComp = posts.map((obj,i)=>{
+      return <PostBody key={i} data={obj}/>
+    })
     return (
       <div>
-        <button onClick={this.loadPost.bind(this)}>click</button>
+        {postComp}
       </div>
     )
   }
 }
 PostList.propTypes = {
-    auth:PropTypes.object.isRequired
+    auth:PropTypes.object.isRequired,
+    post:PropTypes.object.isRequired,
+    retrPost:PropTypes.func.isRequired
 }
 const mapStateToProps = (state)=>({
-    auth:state.auth
+    auth:state.auth,
+    post:state.post
 })
-export default connect(mapStateToProps)(PostList);
+export default connect(mapStateToProps,{retrPost})(PostList);
