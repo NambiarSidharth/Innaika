@@ -22,10 +22,14 @@ class DashboardBody extends Component {
         user navs
         </div>
         <div className="col-md-8 col-sm-12 mt2">
+        <div>
         <PostForm />
         <div className="row">
         <PostList/>
         </div>
+        </div>
+        </div>
+        <div className="col-md-2">
         </div>
       </div>
     )

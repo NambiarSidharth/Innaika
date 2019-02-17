@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {Navbar,Nav} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 class Navigation extends Component {
   logoutHandler=()=>{
@@ -25,8 +26,8 @@ class Navigation extends Component {
       
     </Nav>
     <Nav>
-      <Nav.Link href="#about">About</Nav.Link>
-     <Nav.Link href="#" onSelect={this.logoutHandler}>Log Out</Nav.Link>
+    <Link className="light-blue hover-light-gray no-underline" to="/profile">Bio</Link>
+    <Nav.Link href="#" onSelect={this.logoutHandler}>Log Out</Nav.Link>
     </Nav>
   </Navbar.Collapse>
 </Navbar>

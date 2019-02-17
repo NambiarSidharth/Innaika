@@ -23,7 +23,7 @@ class PostList extends Component {
       return <PostBody key={i} data={obj}/>
     })
     return (
-      <div>
+      <div className="h5">
         {postComp}
       </div>
     )
